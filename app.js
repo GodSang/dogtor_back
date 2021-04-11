@@ -5,6 +5,7 @@ var path = require('path');
 
 var authRouter = require('./routes/auth');
 var usersRouter = require('./routes/index');
+var signUpRouter = require('./routes/signup');
 
 var app = express();
 
@@ -15,6 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/login', authRouter);
 app.use('/users', usersRouter);
+app.use('/signup', signUpRouter);
 
 /*
 firebase.auth().getUser("사용자UID")

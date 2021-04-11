@@ -21,7 +21,7 @@ router.post('/', async function(req, res, next) {
         }
     })
 
-    //console.log(`${JSON.stringify(result)}`);
+//    console.log(`${JSON.stringify(result)}`);
     
     if (result.length) {
       res.status(200).json({"next": "login"});
