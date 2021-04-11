@@ -103,6 +103,6 @@ dist
 # TernJS port file
 .tern-port
 
-/capstonedesign-7b8c8-firebase-adminsdk-uyobr-a6f6472017.json
+/capstonedesign-firebase-key.json
 
 config/
