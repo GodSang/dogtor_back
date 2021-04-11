@@ -12,6 +12,19 @@ router.post('/', async function(req, res, next) {
   token = await admin.auth().getUser(uid);
   userEmail = token.email;
 
+  try {
+    const result = await db.Users.create({
+          email: userEmail,
+          uid: uid,
+          nickname: nickname
+    })
+      res.status(200).json({"next": "sex"});
+
+  
+  } catch (e) {
+    res.status(401).json({"next": "sex"});
+  }
+  /*
   db.Users.create({
     email: userEmail,
     uid: uid,
@@ -23,6 +36,7 @@ router.post('/', async function(req, res, next) {
   .catch(err => {
       res.status(401).json({message:"이미 가입된 정보입니다."});
   })
+  */
 });
 
 module.exports = router;
