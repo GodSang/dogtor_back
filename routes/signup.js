@@ -18,25 +18,11 @@ router.post('/', async function(req, res, next) {
           uid: uid,
           nickname: nickname
     })
-      res.status(200).json({"next": "sex"});
+      res.status(200).json({"message": "가입 성공"});
 
-  
   } catch (e) {
-    res.status(401).json({"next": "sex"});
+    res.status(401).json({"message": "중복되는 정보라 실패"});
   }
-  /*
-  db.Users.create({
-    email: userEmail,
-    uid: uid,
-    nickname: nickname
-  })
-  .then(result => {
-    res.status(200).json({message: "가입 성공"});
-  })
-  .catch(err => {
-      res.status(401).json({message:"이미 가입된 정보입니다."});
-  })
-  */
 });
 
 module.exports = router;
