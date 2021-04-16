@@ -9,10 +9,8 @@ router.post('/', async function(req, res, next) {
   const uid = req.body.uid;
 
   // 미들웨어 호출부 (디코드)
-  console.log("debug1");
   userInfo = await admin.auth().getUser(uid);
   userEmail = userInfo.email;
-  console.log(userInfo.email);
 
   // 디비 조회 후 없는 값이면
   try {
@@ -22,8 +20,6 @@ router.post('/', async function(req, res, next) {
         }
     })
 
-//    console.log(`${JSON.stringify(result)}`);
-    
     if (result.length) {
       res.status(200).json({"next": "login"});
     } else {

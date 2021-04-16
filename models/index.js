@@ -21,6 +21,9 @@ fs
     db[model.name] = model;
   });
 
+  db.user_dog_info.hasMany(db.dog_poo, { foreignKey: 'uid'});
+  db.dog_poo.belongsTo(db.user_dog_info, { foreignKey: 'uid'});
+
 db.sequelize = sequelize;
 
 module.exports = db;

@@ -6,6 +6,16 @@ var path = require('path');
 var authRouter = require('./routes/auth');
 var usersRouter = require('./routes/index');
 var signUpRouter = require('./routes/signup');
+var testRouter = require('./routes/test');
+
+const models = require("./models/index.js");
+
+models.sequelize.sync().then( () => {
+  console.log(" DB 연결 성공");
+}).catch(err => {
+  console.log("DB 연결 실패");
+  console.log(err);
+});
 
 var app = express();
 
@@ -17,22 +27,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/login', authRouter);
 app.use('/users', usersRouter);
 app.use('/signup', signUpRouter);
+app.use('/test', testRouter);
 
 /*
-firebase.auth().getUser("사용자UID")
-  .then((result) => {
-
-    result = result.toJSON()
-    console.log(`${JSON.stringify(result)}`)
-    console.log(`${result.email}`)
-    console.log(`${result.displayName}`)
-  })
-*/
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
-});
+});*/
 
 // error handler
 app.use(function(err, req, res, next) {
