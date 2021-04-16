@@ -6,17 +6,16 @@ var router = express.Router();
 /* GET users listing. */
 // app에서 uid 보내줬을 때
 router.post('/', async function(req, res, next) {
-  const uid = req.body.uid;
-
+  
   // 미들웨어 호출부 (디코드)
-  userInfo = await admin.auth().getUser(uid);
-  userEmail = userInfo.email;
+//  userInfo = await admin.auth().getUser(uid);
+//  userEmail = userInfo.email;
 
   // 디비 조회 후 없는 값이면
   try {
-    const result = await db.Users.findAll({
+    const result = await db.user_dog_info.findAll({
         where: {
-            email: userEmail
+            uid: req.body.uid
         }
     })
 

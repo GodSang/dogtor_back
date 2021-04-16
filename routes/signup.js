@@ -1,4 +1,5 @@
 var express = require('express');
+const { database } = require('../middle/index');
 var admin = require('../middle/index');
 const db = require('../models');
 var router = express.Router();
@@ -7,16 +8,17 @@ var router = express.Router();
 router.post('/', async function(req, res, next) {
   const userInfo = req.body;
 
-  nickname = userInfo.nickname;
-  uid = userInfo.uid;
-  token = await admin.auth().getUser(uid);
-  userEmail = token.email;
+  //token = await admin.auth().getUser(uid);
+  
 
   try {
-    const result = await db.Users.create({
-          email: userEmail,
-          uid: uid,
-          nickname: nickname
+    const result = await db.user_dog_info.create({
+          uid: userInfo.uid,
+          dog_name: userInfo.dog_name,
+          dog_birth: userInfo.dog_birth,
+          dog_type: userInfo.dog_type,
+          dog_gender: userInfo.dog_gender,
+          dog_weight: userInfo.dog_weight 
     })
       res.status(200).json({"message": "가입 성공"});
 

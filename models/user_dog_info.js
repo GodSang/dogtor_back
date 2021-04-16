@@ -32,4 +32,4 @@ module.exports = (sequelize, DataTypes) => {
     })
   }
   return user_dog_info;
-};
+}

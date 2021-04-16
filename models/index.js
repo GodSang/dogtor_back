@@ -21,8 +21,14 @@ fs
     db[model.name] = model;
   });
 
-  db.user_dog_info.hasMany(db.dog_poo, { foreignKey: 'uid'});
-  db.dog_poo.belongsTo(db.user_dog_info, { foreignKey: 'uid'});
+  db.user_dog_info.hasMany(db.dog_poo, { sourceKey: 'uid', foreignKey: 'user_dog_id'});
+  db.dog_poo.belongsTo(db.user_dog_info, { targetKey: 'uid', foreignKey: 'user_dog_id'});
+
+  db.user_dog_info.hasMany(db.dog_pee, { sourceKey: 'uid', foreignKey: 'user_dog_id'});
+  db.dog_pee.belongsTo(db.user_dog_info, { targetKey: 'uid', foreignKey: 'user_dog_id'});
+
+  db.user_dog_info.hasMany(db.intake, { sourceKey: 'uid', foreignKey: 'user_dog_id'});
+  db.intake.belongsTo(db.user_dog_info, { targetKey: 'uid', foreignKey: 'user_dog_id'});
 
 db.sequelize = sequelize;
 

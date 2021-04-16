@@ -2,10 +2,9 @@ var express = require('express');
 var admin = require('../middle/index');
 const db = require('../models');
 
-const getUserEmail = async (req, res, next) => {
+const setCurrentUser = async (req, res, next) => {
     // request의 header에 Authorization란 이름으로 uid를 보내줘야 함
     const uid = req.header('Authorization');
-    console.log(uid)
 
     if (!uid) {
         res.status(403)
@@ -15,14 +14,16 @@ const getUserEmail = async (req, res, next) => {
     
     try {
         // db에 유저 정보가 있는지 판별하는 과정 추가해야함
-        const userInfo = await admin.auth().getUser(uid);
+/*        const userInfo = await admin.auth().getUser(uid);
         if (!userInfo) {
             res.status(403);
             res.json({"message": "토큰이 잘못됨"});
             return;
         }
-
-        req.currentUser = userInfo.email;
+*/
+        req.currentUser = {
+            uid: uid,
+        };
         next();
     } catch (e) {
         res.status(500);
@@ -39,9 +40,9 @@ const checkPermission = async (req, res, next) => {
     }
     
     try {
-        const result = await db.Users.findOne({
+        const result = await db.user_dog_info.findOne({
             where: {
-                email: currentUser
+                uid: currentUser.uid
             }
         })
 
@@ -59,6 +60,6 @@ const checkPermission = async (req, res, next) => {
 }
 
 module.exports = {
-    getUserEmail: getUserEmail,
+    setCurrentUser: setCurrentUser,
     checkPermission: checkPermission
 }

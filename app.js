@@ -4,18 +4,12 @@ var createError = require('http-errors');
 var path = require('path');
 
 var authRouter = require('./routes/auth');
-var usersRouter = require('./routes/index');
 var signUpRouter = require('./routes/signup');
-var testRouter = require('./routes/test');
+var infoRouter = require('./routes/dogToRaspb');
+
 
 const models = require("./models/index.js");
 
-models.sequelize.sync().then( () => {
-  console.log(" DB 연결 성공");
-}).catch(err => {
-  console.log("DB 연결 실패");
-  console.log(err);
-});
 
 var app = express();
 
@@ -25,9 +19,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/login', authRouter);
-app.use('/users', usersRouter);
 app.use('/signup', signUpRouter);
-app.use('/test', testRouter);
+app.use('/info', infoRouter);
 
 /*
 // catch 404 and forward to error handler

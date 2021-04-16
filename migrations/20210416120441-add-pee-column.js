@@ -5,7 +5,7 @@ const { sequelize } = require("../models");
 module.exports = {
   up: async (queryInterface, Sequelize) => {
 
-     return queryInterface.addColumn('dog_poos', 'user_dog_id', {
+     return queryInterface.addColumn('dog_pees', 'user_dog_id', {
       type: Sequelize.STRING,
       references: {
         model: 'user_dog_infos',
@@ -17,7 +17,6 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-
-     return queryInterface.removeColumn('dog_poos', 'user_dog_id')
+     return queryInterface.removeColumn('dog_pees', 'user_dog_id')
   }
 };

@@ -1,45 +1,68 @@
 var express = require('express');
 const db = require('../models');
 
-// 대소변 구분짓는 flag 추출
-const getPooPeeFlag = async (req, res, next) => {       // async가 필수인가? await를 안써도??
-    const flag = req.body.flag;
-    req.pooPeeFlag = flag;
-    next();
-}
-
-const insertPooPeeData = async (req, res, next) => {
+const insertPooData = async (req, res, next) => {
     const pooData = req.body;
 
-    if(req.pooPeeFlag != "poo") {       // 대변일 경우
-        db.poo.create({
+    try {
+
+        // const result =  await db.dog_poo.findOne({
+        //     include: db.user_dog_info,
+        //     where: {
+        //         user_dog_id: req.currentUser.uid
+        //     }
+        // })
+
+        // const userToDog = await db.user_dog_info.findOne({
+        //     include: db.dog_poo,
+        //     where: {
+        //         uid: req.currentUser.uid
+        //     }
+        // })
+
+        await db.dog_poo.create({
             size: pooData.size,
-            R: pooData.r,
-            G: pooData.g,
-            B: pooData.b,
-            uid: pooData.uid
-          })
-          res.status(200).json({"message":"poo data insert success"});
-          next();
-    }
-    else if(req.pooPeeFlag != "pee") {  // 소변일 경우
-        db.pee.create({
-            size: pooData.size,
-            R: pooData.r,
-            G: pooData.g,
-            B: pooData.b,
-            uid: pooData.uid
-          })
-          res.status(200).json({"message":"pee data insert success"});
-          next();
-    }
-    else {
-        return;
+            RGB: pooData.RGB,
+            user_dog_id: req.currentUser.uid
+        })
+        
+        next();
+    } catch (e) {
+        console.log(e)
+        res.status(400).json({"message":"database insert error(Poo)"});
     }
 }
 
+const insertPeeData = async (req, res, next) => {
+    const peeData = req.body;
+    try {
+        await db.dog_pee.create({
+            size: peeData.size,
+            RGB: peeData.RGB,
+            user_dog_id: req.currentUser.uid
+        })
+        next();
+    } catch (e) {
+        res.status(400).json({"message":"database insert error(Pee)"});
+    }
+}
+
+const insertEatData = async (req, res, next) => {
+    const eatData = req.body;
+
+    try {
+        const intakeInfo = await db.intake.create({
+            amountOfMeal: eatData.weight,
+            user_dog_id: req.currentUser.uid
+        })
+        next();
+    } catch (e) {
+        res.status(400).json({"message":"database insert error(Intake)"});
+    }
+}
 
 module.exports = {
-    getPooPeeFlag: getPooPeeFlag,
-    insertPooPeeData: insertPooPeeData
+    insertPooData: insertPooData,
+    insertPeeData: insertPeeData,
+    insertEatData: insertEatData
 }
