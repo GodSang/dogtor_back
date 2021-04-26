@@ -30,6 +30,14 @@ module.exports = (sequelize, DataTypes) => {
       foreignKey: 'user_dog_id',
       as: 'poos'
     })
+    user_dog_info.hasMany(models.dog_pee, {
+      foreignKey: 'user_dog_id',
+      as: 'pees'
+    })
+    user_dog_info.hasMany(models.intake, {
+      foreignKey: 'user_dog_id',
+      as: 'intakes'
+    })
   }
   return user_dog_info;
 }
