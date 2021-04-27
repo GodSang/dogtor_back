@@ -16,14 +16,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/login', authRouter);    // APP LOGIN 처리
+app.use('/login', authRouter); // APP LOGIN 처리
 app.use('/signup', signUpRouter); // APP Sign up 처리
-app.use('/poo', pooRouter);       // 대변 관련 CRUD 처리
-app.use('/pee', peeRouter);       // 소변 관련 CRUD 처리
+app.use('/poo', pooRouter); // 대변 관련 CRUD 처리
+app.use('/pee', peeRouter); // 소변 관련 CRUD 처리
 app.use('/intake', intakeRouter); // 식사량 관련 CRUD 처리
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};

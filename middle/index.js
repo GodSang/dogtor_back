@@ -1,9 +1,9 @@
-var admin = require("firebase-admin");
+var admin = require('firebase-admin');
 
-var serviceAccount = require("../capstonedesign-firebase-key.json");
+var serviceAccount = require('../capstonedesign-firebase-key.json');
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+  credential: admin.credential.cert(serviceAccount),
 });
 
 module.exports = admin;

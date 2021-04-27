@@ -4,10 +4,14 @@ const auth = require('../middle/auth');
 
 /* GET home page. */
 
-router.post('/test', auth.getUserEmail, auth.checkPermission,
-  function(req, res, next) {
+router.post(
+  '/test',
+  auth.getUserEmail,
+  auth.checkPermission,
+  function (req, res, next) {
     console.log(req.currentUser);
-    res.json({message: "success"})
-});
+    res.json({ message: 'success' });
+  }
+);
 
-module.exports = router
+module.exports = router;
