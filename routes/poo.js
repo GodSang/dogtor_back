@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 const db = require('../models/index');
-const dogToRaspb = require('../middle/dogToRaspb');
 const auth = require('../middle/auth');
 const dogPoo = require('../middle/dogPoo');
 
