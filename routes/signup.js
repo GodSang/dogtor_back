@@ -1,15 +1,10 @@
 var express = require('express');
-const { database } = require('../middle/index');
-var admin = require('../middle/index');
 const db = require('../models');
 var router = express.Router();
 
 
 router.post('/', async function(req, res, next) {
   const userInfo = req.body;
-
-  //token = await admin.auth().getUser(uid);
-  
 
   try {
     const result = await db.user_dog_info.create({

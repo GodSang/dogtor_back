@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var bodyParser = require('body-parser');
 const auth = require('../middle/auth');
 
 /* GET home page. */

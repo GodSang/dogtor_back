@@ -1,4 +1,3 @@
-var express = require('express');
 const db = require('../models');
 const Sequelize = require('sequelize');
 

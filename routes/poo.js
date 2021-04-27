@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-const db = require('../models/index');
 const auth = require('../middle/auth');
 const dogPoo = require('../middle/dogPoo');
 
@@ -10,6 +9,7 @@ router.post('/', auth.setCurrentUser, auth.checkPermission, dogPoo.createPooData
     res.status(201).json({message: "create poo success"});
 });
 
+// Read
 router.get('/', auth.setCurrentUser, auth.checkPermission, dogPoo.readPooData,
   function(req, res, next) {
     res.status(201).json({message: "read poo success"});

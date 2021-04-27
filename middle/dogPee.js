@@ -1,9 +1,8 @@
-var express = require('express');
 const db = require('../models');
 const Sequelize = require('sequelize');
 
 const createPeeData = async (req, res, next) => {
-    const eeData = req.body;
+    const peeData = req.body;
 
     try {
         await db.dog_pee.create({

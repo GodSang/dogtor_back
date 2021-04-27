@@ -1,11 +1,10 @@
 var express = require('express');
 var router = express.Router();
-const db = require('../models/index');
-const dogIntake = require('../middle/dogIntake');
 const auth = require('../middle/auth');
+const dogIntake = require('../middle/dogIntake');
 
 // Create
-router.post('/', auth.setCurrentUser, auth.checkPermission, dogIntake.createEatData,
+router.post('/', auth.setCurrentUser, auth.checkPermission, dogIntake.createIntakeData,
   function(req, res, next){
     res.status(201).json({message: "create intake success"});
 });

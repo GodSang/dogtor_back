@@ -1,4 +1,3 @@
-var express = require('express');
 const db = require('../models');
 const Sequelize = require('sequelize');
 
@@ -25,7 +24,7 @@ const readIntakeData = async (req, res, next) => {
     try {
         const result =  await db.intake.findAll({
             attributes: [
-                "RGB", "createdAt"
+                "amountOfMeal", "createdAt"
             ],
             where: {
                 user_dog_id: req.currentUser.uid,

@@ -1,5 +1,3 @@
-var express = require('express');
-var admin = require('../middle/index');
 const db = require('../models');
 
 const setCurrentUser = async (req, res, next) => {
@@ -13,14 +11,6 @@ const setCurrentUser = async (req, res, next) => {
     }
     
     try {
-        // db에 유저 정보가 있는지 판별하는 과정 추가해야함
-/*        const userInfo = await admin.auth().getUser(uid);
-        if (!userInfo) {
-            res.status(403);
-            res.json({"message": "토큰이 잘못됨"});
-            return;
-        }
-*/
         req.currentUser = {
             uid: uid,
         };

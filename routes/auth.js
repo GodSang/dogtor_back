@@ -1,5 +1,4 @@
 var express = require('express');
-var admin = require('../middle/index');
 const db = require('../models');
 var router = express.Router();
 
