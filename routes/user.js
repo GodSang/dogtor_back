@@ -2,6 +2,7 @@ var express = require('express');
 const db = require('../models');
 var router = express.Router();
 
+// Create
 router.post('/', async function (req, res, next) {
   const userInfo = req.body;
 
@@ -22,7 +23,6 @@ router.post('/', async function (req, res, next) {
       dog_weight: userInfo.dog_weight,
     });
   } catch (e) {
-    res.json(e);
     res.status(401).json({ message: '중복되는 정보라 실패' });
   }
 });
