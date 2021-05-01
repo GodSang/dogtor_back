@@ -8,6 +8,8 @@ var userRouter = require('./routes/user');
 var pooRouter = require('./routes/poo');
 var peeRouter = require('./routes/pee');
 var intakeRouter = require('./routes/intake');
+const admin = require('firebase-admin');
+let key = require('./capstonedesign-firebase-key');
 
 var app = express();
 
@@ -15,6 +17,11 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// FCM 을 위한 firebase 연결 부분
+admin.initializeApp({
+  credential: admin.credential.cert(key),
+});
 
 app.use('/login', authRouter); // APP LOGIN 처리
 app.use('/user', userRouter); // APP Sign up 처리
