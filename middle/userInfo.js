@@ -17,6 +17,7 @@ const createUserInfo = async (req, res, next) => {
     result.uid = null;
     res.status(201).json(result);
   } catch (e) {
+	  console.log(e);
     res.status(401).json({ message: '회원 가입 실패' });
   }
 };
