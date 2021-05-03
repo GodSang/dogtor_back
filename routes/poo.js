@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 const auth = require('../middle/auth');
 const dogPoo = require('../middle/dogPoo');
+const dogWeight = require('../middle/dogWeight');
 
 // Create
 router.post(
@@ -9,6 +10,7 @@ router.post(
   auth.setCurrentUser,
   auth.checkPermission,
   dogPoo.createPooData,
+  dogWeight.updateWeightData,
   function (req, res, next) {
     res.status(201).json({ message: 'create poo success' });
   }
