@@ -35,11 +35,10 @@ const readPeeData = async (req, res, next) => {
         },
       },
       order: [['createdAt', 'DESC']],
-      limit: 2,
+      limit: peeData.limit * 1,
       offset: peeData.page * 2,
     });
     res.json(result);
-    //next();
   } catch (e) {
     console.log(e);
     res.status(400).json({ message: 'database insert error(Pee)' });

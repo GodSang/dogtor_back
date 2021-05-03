@@ -32,11 +32,10 @@ const readIntakeData = async (req, res, next) => {
         },
       },
       order: [['createdAt', 'DESC']],
-      limit: 2,
+      limit: intakeData.iimit * 1,
       offset: intakeData.page * 2,
     });
     res.json(result);
-    //next();
   } catch (e) {
     console.log(e);
     res.status(400).json({ message: 'database insert error Intake' });
