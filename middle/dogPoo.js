@@ -1,9 +1,28 @@
 const db = require('../models');
 const Sequelize = require('sequelize');
+const admin = require('firebase-admin');
 
 const createPooData = async (req, res, next) => {
   const pooData = req.body;
+  const target_token = req.currentUser.uid;
 
+  const message = {
+    notification: {
+      title: '테스트 데이터 발송',
+      body: '데이터가 잘 가나요?',
+    },
+    token: target_token,
+  };
+
+  admin
+    .messaging()
+    .send(message)
+    .then(function (response) {
+      console.log('Successfully sent message : ', response);
+    })
+    .catch(function (err) {
+      console.log('Error Sending message!!! : ', err);
+    });
   try {
     await db.dog_poo.create({
       size: pooData.size,
@@ -35,11 +54,10 @@ const readPooData = async (req, res, next) => {
         },
       },
       order: [['createdAt', 'DESC']],
-      limit: 2,
+      limit: pooData.limit * 1,
       offset: pooData.page * 2,
     });
     res.json(result);
-    //next();
   } catch (e) {
     console.log(e);
     res.status(400).json({ message: 'database insert error(Poo)' });
