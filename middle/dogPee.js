@@ -25,7 +25,7 @@ const readPeeData = async (req, res, next) => {
   endDate.setDate(endDate.getDate() + 1);
 
   try {
-    const result = await db.dog_pee.findAll({
+    const result = await db.dog_pee.findAndCountAll({
       attributes: ['RGB', 'createdAt'],
       where: {
         user_dog_id: req.currentUser.uid,
