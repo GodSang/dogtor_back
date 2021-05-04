@@ -22,7 +22,7 @@ const readIntakeData = async (req, res, next) => {
   endDate.setDate(endDate.getDate() + 1);
 
   try {
-    const result = await db.intake.findAll({
+    const result = await db.intake.findAndCountAll({
       attributes: ['amountOfMeal', 'createdAt'],
       where: {
         user_dog_id: req.currentUser.uid,
@@ -32,7 +32,7 @@ const readIntakeData = async (req, res, next) => {
         },
       },
       order: [['createdAt', 'DESC']],
-      limit: intakeData.iimit * 1,
+      limit: intakeData.limit * 1,
       offset: intakeData.page * 2,
     });
     res.json(result);
