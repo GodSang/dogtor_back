@@ -15,6 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       size: DataTypes.FLOAT,
       RGB: DataTypes.STRING,
+      HSV: DataTypes.STRING,
     },
     {
       sequelize,
