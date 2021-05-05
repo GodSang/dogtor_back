@@ -33,7 +33,7 @@ const readIntakeData = async (req, res, next) => {
       },
       order: [['createdAt', 'DESC']],
       limit: intakeData.limit * 1,
-      offset: intakeData.page * 2,
+      offset: intakeData.page * (intakeData.limit * 1),
     });
     res.json(result);
   } catch (e) {

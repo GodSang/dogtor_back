@@ -5,6 +5,7 @@ const setCurrentUser = async (req, res, next) => {
   const uid = req.header('Authorization');
 
   if (!uid) {
+	console.log("zz");
     res.status(403);
     res.json({ message: '토큰이 비정상적임' });
     return;
@@ -24,6 +25,7 @@ const setCurrentUser = async (req, res, next) => {
 const checkPermission = async (req, res, next) => {
   const currentUser = req.currentUser;
   if (!currentUser) {
+	  console.log("bb");
     res.status(403);
     res.json({ message: 'forbidden' });
     return;
@@ -37,6 +39,7 @@ const checkPermission = async (req, res, next) => {
     });
 
     if (!result) {
+	    console.log("cc");
       res.status(403);
       res.json({ message: 'forbidden' });
       return;
