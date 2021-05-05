@@ -6,27 +6,28 @@ const createPooData = async (req, res, next) => {
   const pooData = req.body;
   const target_token = req.currentUser.uid;
 
-  const message = {
-    notification: {
-      title: '테스트 데이터 발송',
-      body: '데이터가 잘 가나요?',
-    },
-    token: target_token,
-  };
+  // const message = {
+  //   notification: {
+  //     title: '테스트 데이터 발송',
+  //     body: '데이터가 잘 가나요?',
+  //   },
+  //   token: target_token,
+  // };
 
-  admin
-    .messaging()
-    .send(message)
-    .then(function (response) {
-      console.log('Successfully sent message : ', response);
-    })
-    .catch(function (err) {
-      console.log('Error Sending message!!! : ', err);
-    });
+  // admin
+  //   .messaging()
+  //   .send(message)
+  //   .then(function (response) {
+  //     console.log('Successfully sent message : ', response);
+  //   })
+  //   .catch(function (err) {
+  //     console.log('Error Sending message!!! : ', err);
+  //   });
   try {
     await db.dog_poo.create({
       size: pooData.size,
       RGB: pooData.RGB,
+      HSV: pooData.HSV,
       user_dog_id: req.currentUser.uid,
     });
     next();
