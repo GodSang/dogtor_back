@@ -3,12 +3,14 @@ var router = express.Router();
 const auth = require('../middle/auth');
 const dogPoo = require('../middle/dogPoo');
 const dogWeight = require('../middle/dogWeight');
+const alarm = require('../middle/alarm');
 
 // Create
 router.post(
   '/',
   auth.setCurrentUser,
   auth.checkPermission,
+  alarm.searchFcmKey,
   dogPoo.createPooData,
   dogWeight.updateWeightData,
   function (req, res, next) {

@@ -4,25 +4,25 @@ const admin = require('firebase-admin');
 
 const createPooData = async (req, res, next) => {
   const pooData = req.body;
-  const target_token = req.currentUser.uid;
+  var target_token = req.currentUser.fcmKey.fcmKey;
 
-  // const message = {
-  //   notification: {
-  //     title: '테스트 데이터 발송',
-  //     body: '데이터가 잘 가나요?',
-  //   },
-  //   token: target_token,
-  // };
+  var message = {
+    notification: {
+      title: '테스트 데이터 발송',
+      body: '데이터가 잘 가나요?',
+    },
+    token: target_token,
+  };
 
-  // admin
-  //   .messaging()
-  //   .send(message)
-  //   .then(function (response) {
-  //     console.log('Successfully sent message : ', response);
-  //   })
-  //   .catch(function (err) {
-  //     console.log('Error Sending message!!! : ', err);
-  //   });
+  admin
+    .messaging()
+    .send(message)
+    .then(function (response) {
+      console.log('Successfully sent message : ', response);
+    })
+    .catch(function (err) {
+      console.log('Error Sending message!!! : ', err);
+    });
   try {
     await db.dog_poo.create({
       size: pooData.size,
@@ -32,7 +32,7 @@ const createPooData = async (req, res, next) => {
     });
     next();
   } catch (e) {
-    console.log(e);
+    // console.log(e);
     res.status(400).json({ message: 'database insert error(Poo)' });
   }
 };
