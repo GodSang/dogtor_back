@@ -8,6 +8,7 @@ const createPeeData = async (req, res, next) => {
     await db.dog_pee.create({
       size: peeData.size,
       RGB: peeData.RGB,
+      HSV: peeData.HSV,
       user_dog_id: req.currentUser.uid,
     });
     next();
