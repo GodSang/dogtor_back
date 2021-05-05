@@ -53,6 +53,15 @@ db.intake.belongsTo(db.user_dog_info, {
   foreignKey: 'user_dog_id',
 });
 
+db.user_dog_info.hasMany(db.intake, {
+  sourceKey: 'uid',
+  foreignKey: 'user_id',
+});
+db.alarm.belongsTo(db.user_dog_info, {
+  targetKey: 'uid',
+  foreignKey: 'user_id',
+});
+
 db.sequelize = sequelize;
 
 module.exports = db;
