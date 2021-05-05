@@ -36,7 +36,7 @@ const readPeeData = async (req, res, next) => {
       },
       order: [['createdAt', 'DESC']],
       limit: peeData.limit * 1,
-      offset: peeData.page * 2,
+      offset: peeData.page * (peeData.limit*1),
     });
     res.json(result);
   } catch (e) {
