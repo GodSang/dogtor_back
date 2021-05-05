@@ -8,6 +8,7 @@ var userRouter = require('./routes/user');
 var pooRouter = require('./routes/poo');
 var peeRouter = require('./routes/pee');
 var intakeRouter = require('./routes/intake');
+var alarmRouter = require('./routes/alarm');
 const admin = require('firebase-admin');
 let key = require('./capstonedesign-firebase-key');
 
@@ -28,6 +29,7 @@ app.use('/user', userRouter); // APP Sign up 처리
 app.use('/poo', pooRouter); // 대변 관련 CRUD 처리
 app.use('/pee', peeRouter); // 소변 관련 CRUD 처리
 app.use('/intake', intakeRouter); // 식사량 관련 CRUD 처리
+app.use('/alarm', alarmRouter); // 푸시알림 관련 CRUD 처리
 
 // error handler
 app.use(function (err, req, res, next) {
