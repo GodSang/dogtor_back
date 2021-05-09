@@ -33,7 +33,26 @@ const searchFcmKey = async (req, res, next) => {
   }
 };
 
+const updateAlarmOption = async (req, res, next) => {
+  const optionFlag = req.body.optionFlag;
+
+  try {
+    const result = await db.alarm.update(
+      { alarmOption: optionFlag },
+      {
+        where: {
+          user_id: req.currentUser.uid,
+        },
+      }
+    );
+    next();
+  } catch (e) {
+    res.status(400).json({ message: 'Alarm option failed' });
+  }
+};
+
 module.exports = {
   createFcmKeyData: createFcmKeyData,
   searchFcmKey: searchFcmKey,
+  updateAlarmOption: updateAlarmOption,
 };

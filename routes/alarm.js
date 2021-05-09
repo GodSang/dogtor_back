@@ -14,13 +14,14 @@ router.post(
   }
 );
 
-// push alarm option Create
+// push alarm option Update
 router.post(
   '/option',
   auth.setCurrentUser,
   auth.checkPermission,
+  alarm.updateAlarmOption,
   function (req, res, next) {
-    res.status(201).json({ message: 'read pee success' });
+    res.status(201).json({ message: 'update alarm option success' });
   }
 );
 
