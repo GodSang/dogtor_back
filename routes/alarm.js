@@ -8,7 +8,7 @@ router.post(
   '/',
   auth.setCurrentUser,
   auth.checkPermission,
-  alarm.createFcmKeyData,
+  alarm.createOrUpdateFcmKeyData,
   function (req, res, next) {
     res.status(201).json({ message: 'insert fcmKey success' });
   }

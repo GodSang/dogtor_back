@@ -1,12 +1,25 @@
 const db = require('../models');
 
-const createFcmKeyData = async (req, res, next) => {
+const createOrUpdateFcmKeyData = async (req, res, next) => {
   const fcmData = req.body;
   try {
-    const result = await db.alarm.create({
-      fcmKey: fcmData.key,
-      user_id: req.currentUser.uid,
+    const result = await db.alarm.findOne({
+      where: { user_id: req.currentUser.uid },
     });
+    if (!result) {
+      await db.alarm.create({
+        fcmKey: fcmData.key,
+        user_id: req.currentUser.uid,
+      });
+    }
+    await db.alarm.update(
+      { fcmKey: fcmData.key },
+      {
+        where: {
+          user_id: req.currentUser.uid,
+        },
+      }
+    );
     next();
   } catch (e) {
     console.log(e);
@@ -52,7 +65,7 @@ const updateAlarmOption = async (req, res, next) => {
 };
 
 module.exports = {
-  createFcmKeyData: createFcmKeyData,
+  createOrUpdateFcmKeyData: createOrUpdateFcmKeyData,
   searchFcmKey: searchFcmKey,
   updateAlarmOption: updateAlarmOption,
 };
