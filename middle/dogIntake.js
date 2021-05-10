@@ -5,7 +5,7 @@ const createIntakeData = async (req, res, next) => {
   const intakeData = req.body;
   try {
     const intakeInfo = await db.intake.create({
-      amountOfMeal: intakeData.weight,
+      amountOfMeal: intakeData.amountOfMeal,
       user_dog_id: req.currentUser.uid,
     });
     next();
