@@ -28,7 +28,6 @@ const createOrUpdateFcmKeyData = async (req, res, next) => {
 };
 
 const searchFcmKey = async (req, res, next) => {
-  //   console.log(currentUser.uid);
   try {
     const fcmKey = await db.alarm.findOne({
       where: {
@@ -41,7 +40,6 @@ const searchFcmKey = async (req, res, next) => {
     };
     next();
   } catch (e) {
-    // res.json(e);
     res.status(400).json({ message: 'fcmKey not found' });
   }
 };
