@@ -3,6 +3,7 @@ const Sequelize = require('sequelize');
 
 const createPeeData = async (req, res, next) => {
   const peeData = req.body;
+  req.shouldRunFcm = false;
 
   try {
     await db.dog_pee.create({

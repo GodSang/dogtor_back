@@ -41,7 +41,13 @@ const readIntakeData = async (req, res, next) => {
   }
 };
 
+const calcIntake = async (req, res, next) => {
+  req.shouldRunFcm = false;
+  next();
+};
+
 module.exports = {
   createIntakeData: createIntakeData,
   readIntakeData: readIntakeData,
+  calcIntake: calcIntake,
 };

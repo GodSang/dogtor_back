@@ -1,4 +1,5 @@
 const db = require('../models');
+const admin = require('firebase-admin');
 
 const createOrUpdateFcmKeyData = async (req, res, next) => {
   const fcmData = req.body;
@@ -28,6 +29,9 @@ const createOrUpdateFcmKeyData = async (req, res, next) => {
 };
 
 const searchFcmKey = async (req, res, next) => {
+  if (!req.shouldRunFcm) {
+    return next();
+  }
   try {
     const fcmKey = await db.alarm.findOne({
       where: {
@@ -62,8 +66,34 @@ const updateAlarmOption = async (req, res, next) => {
   }
 };
 
+const createPushAlarm = async (req, res, next) => {
+  if (!req.shouldRunFcm) {
+    return next();
+  }
+  var target_fcm = req.currentUser.fcmKey;
+
+  var message = {
+    notification: {
+      title: '테스트 데이터 발송',
+      body: '데이터가 잘 가나요?',
+    },
+    fcmToken: target_fcm,
+  };
+
+  admin
+    .messaging()
+    .send(message)
+    .then(function (response) {
+      console.log('Successfully sent message : ', response);
+    })
+    .catch(function (err) {
+      console.log('Error Sending message!!! : ', err);
+    });
+};
+
 module.exports = {
   createOrUpdateFcmKeyData: createOrUpdateFcmKeyData,
   searchFcmKey: searchFcmKey,
   updateAlarmOption: updateAlarmOption,
+  createPushAlarm: createPushAlarm,
 };

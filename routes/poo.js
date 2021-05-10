@@ -8,8 +8,9 @@ const alarm = require('../middle/alarm');
 router.post(
   '/',
   auth.setCurrentUser,
-  alarm.searchFcmKey,
   dogPoo.createPooData,
+  alarm.searchFcmKey,
+  alarm.createPushAlarm,
   function (req, res, next) {
     res.status(201).json({ message: 'create poo success' });
   }
