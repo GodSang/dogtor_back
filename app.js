@@ -7,6 +7,7 @@ var authRouter = require('./routes/auth');
 var userRouter = require('./routes/user');
 var pooRouter = require('./routes/poo');
 var peeRouter = require('./routes/pee');
+var weightRouter = require('./routes/weight');
 var intakeRouter = require('./routes/intake');
 var alarmRouter = require('./routes/alarm');
 const admin = require('firebase-admin');
@@ -30,6 +31,7 @@ app.use('/poo', pooRouter); // 대변 관련 CRUD 처리
 app.use('/pee', peeRouter); // 소변 관련 CRUD 처리
 app.use('/intake', intakeRouter); // 식사량 관련 CRUD 처리
 app.use('/alarm', alarmRouter); // 푸시알림 관련 CRUD 처리
+app.use('/weight', weightRouter);
 
 // error handler
 app.use(function (err, req, res, next) {
