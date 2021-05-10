@@ -13,7 +13,6 @@ module.exports = (sequelize, DataTypes) => {
   }
   dog_poo.init(
     {
-      size: DataTypes.FLOAT,
       RGB: DataTypes.STRING,
       HSV: DataTypes.STRING,
     },
