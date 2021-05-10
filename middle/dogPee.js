@@ -6,7 +6,6 @@ const createPeeData = async (req, res, next) => {
 
   try {
     await db.dog_pee.create({
-      size: peeData.size,
       RGB: peeData.RGB,
       HSV: peeData.HSV,
       user_dog_id: req.currentUser.uid,
@@ -37,7 +36,7 @@ const readPeeData = async (req, res, next) => {
       },
       order: [['createdAt', 'DESC']],
       limit: peeData.limit * 1,
-      offset: peeData.page * (peeData.limit*1),
+      offset: peeData.page * (peeData.limit * 1),
     });
     res.json(result);
   } catch (e) {

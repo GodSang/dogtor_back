@@ -25,7 +25,6 @@ const createPooData = async (req, res, next) => {
     });
   try {
     await db.dog_poo.create({
-      size: pooData.size,
       RGB: pooData.RGB,
       HSV: pooData.HSV,
       user_dog_id: req.currentUser.uid,
