@@ -1,19 +1,18 @@
-const db = require('../models');
+var jwt = require('jsonwebtoken');
+var secretObj = require('../config/jwt');
 
 const setCurrentUser = async (req, res, next) => {
-  // request의 header에 Authorization란 이름으로 uid를 보내줘야 함
-  const uid = req.header('Authorization');
-
-  if (!uid) {
-	console.log("zz");
-    res.status(403);
-    res.json({ message: '토큰이 비정상적임' });
-    return;
-  }
-
+  // 토큰 디코드 후 email 추출
+  const token = req.header('Authorization');
   try {
+    const decoded = jwt.verify(token, secretObj.secret);
+    if (!decoded) {
+      res.status(403);
+      res.json({ message: '토큰이 비정상적임' });
+      return;
+    }
     req.currentUser = {
-      uid: uid,
+      uid: decoded.email,
     };
     next();
   } catch (e) {
@@ -22,36 +21,6 @@ const setCurrentUser = async (req, res, next) => {
   }
 };
 
-const checkPermission = async (req, res, next) => {
-  const currentUser = req.currentUser;
-  if (!currentUser) {
-	  console.log("bb");
-    res.status(403);
-    res.json({ message: 'forbidden' });
-    return;
-  }
-
-  try {
-    const result = await db.user_dog_info.findOne({
-      where: {
-        uid: currentUser.uid,
-      },
-    });
-
-    if (!result) {
-	    console.log("cc");
-      res.status(403);
-      res.json({ message: 'forbidden' });
-      return;
-    }
-
-    next();
-  } catch (e) {
-    res.status(500);
-  }
-};
-
 module.exports = {
   setCurrentUser: setCurrentUser,
-  checkPermission: checkPermission,
 };

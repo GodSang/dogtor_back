@@ -7,7 +7,6 @@ const dogWeight = require('../middle/dogWeight');
 router.post(
   '/',
   auth.setCurrentUser,
-  auth.checkPermission,
   dogWeight.updateWeightData,
   function (req, res, next) {
     res.status(201).json({ message: 'update weight success' });
@@ -15,13 +14,8 @@ router.post(
 );
 
 // Read
-router.get(
-  '/',
-  auth.setCurrentUser,
-  auth.checkPermission,
-  function (req, res, next) {
-    res.status(201).json({ message: 'read poo success' });
-  }
-);
+router.get('/', auth.setCurrentUser, function (req, res, next) {
+  res.status(201).json({ message: 'read poo success' });
+});
 
 module.exports = router;

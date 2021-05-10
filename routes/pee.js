@@ -7,7 +7,6 @@ const dogPee = require('../middle/dogPee');
 router.post(
   '/',
   auth.setCurrentUser,
-  auth.checkPermission,
   dogPee.createPeeData,
   function (req, res, next) {
     res.status(201).json({ message: 'insert pee success' });
@@ -18,7 +17,6 @@ router.post(
 router.get(
   '/',
   auth.setCurrentUser,
-  auth.checkPermission,
   dogPee.readPeeData,
   function (req, res, next) {
     res.status(201).json({ message: 'read pee success' });

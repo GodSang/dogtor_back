@@ -7,11 +7,6 @@ const auth = require('../middle/auth');
 router.post('/', userInfo.createUserInfo);
 
 // Read
-router.get(
-  '/',
-  auth.setCurrentUser,
-  auth.checkPermission,
-  userInfo.readUserInfo
-);
+router.get('/', auth.setCurrentUser, userInfo.readUserInfo);
 
 module.exports = router;

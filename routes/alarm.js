@@ -7,7 +7,6 @@ const alarm = require('../middle/alarm');
 router.post(
   '/',
   auth.setCurrentUser,
-  auth.checkPermission,
   alarm.createOrUpdateFcmKeyData,
   function (req, res, next) {
     res.status(201).json({ message: 'insert fcmKey success' });
@@ -18,7 +17,6 @@ router.post(
 router.post(
   '/option',
   auth.setCurrentUser,
-  auth.checkPermission,
   alarm.updateAlarmOption,
   function (req, res, next) {
     res.status(201).json({ message: 'update alarm option success' });

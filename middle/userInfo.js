@@ -1,23 +1,34 @@
 const db = require('../models');
-const Sequelize = require('sequelize');
+var admin = require('firebase-admin');
+var jwt = require('jsonwebtoken');
+var secretObj = require('../config/jwt');
 
 const createUserInfo = async (req, res, next) => {
   const userInfo = req.body;
+  const decodeToken = await admin.auth().getUser(userInfo.uid);
+  const userEmail = decodeToken.email;
 
+  var token = jwt.sign(
+    {
+      email: userEmail,
+    },
+    secretObj.secret,
+    {
+      expiresIn: '720 days',
+    }
+  );
   try {
     const result = await db.user_dog_info.create({
-      uid: userInfo.uid,
+      uid: userEmail,
       dog_name: userInfo.dog_name,
       dog_birth: userInfo.dog_birth,
       dog_type: userInfo.dog_type,
       dog_gender: userInfo.dog_gender,
       dog_weight: userInfo.dog_weight,
     });
-
-    result.uid = null;
-    res.status(201).json(result);
+    res.status(201).json({ token: token });
   } catch (e) {
-	  console.log(e);
+    console.log(e);
     res.status(401).json({ message: '회원 가입 실패' });
   }
 };

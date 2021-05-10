@@ -7,7 +7,6 @@ const dogIntake = require('../middle/dogIntake');
 router.post(
   '/',
   auth.setCurrentUser,
-  auth.checkPermission,
   dogIntake.createIntakeData,
   function (req, res, next) {
     res.status(201).json({ message: 'create intake success' });
@@ -18,7 +17,6 @@ router.post(
 router.get(
   '/',
   auth.setCurrentUser,
-  auth.checkPermission,
   dogIntake.readIntakeData,
   function (req, res, next) {
     res.status(201).json({ message: 'read intake success' });
