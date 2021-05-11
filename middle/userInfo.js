@@ -73,7 +73,7 @@ const updateUserInfo = async (req, res, next) => {
       },
       { where: { uid: userEmail } }
     );
-    res.status(201).json(result);
+    res.status(201).json({ message: 'update 성공' });
   } catch (e) {
     console.log(e);
     res.status(401).json({ message: '회원 가입 실패' });
