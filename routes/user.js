@@ -9,4 +9,6 @@ router.post('/', userInfo.createUserInfo);
 // Read
 router.get('/', auth.setCurrentUser, userInfo.readUserInfo);
 
+router.post('/update', auth.setCurrentUser, userInfo.updateUserInfo);
+
 module.exports = router;
