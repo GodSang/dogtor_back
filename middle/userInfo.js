@@ -25,6 +25,7 @@ const createUserInfo = async (req, res, next) => {
       dog_type: userInfo.dog_type,
       dog_gender: userInfo.dog_gender,
       dog_weight: userInfo.dog_weight,
+      dog_image: userInfo.dog_image,
     });
     res.status(201).json({ token: token });
   } catch (e) {
@@ -42,6 +43,7 @@ const readUserInfo = async (req, res, next) => {
         'dog_type',
         'dog_gender',
         'dog_weight',
+        'dog_image',
       ],
       where: {
         uid: req.currentUser.uid,
