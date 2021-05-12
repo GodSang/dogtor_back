@@ -24,7 +24,8 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: 'user_dog_info',
-    }
+    },
+    { charset: 'utf8', collate: 'utf8_unicode_ci' }
   );
 
   user_dog_info.associate = (models) => {
