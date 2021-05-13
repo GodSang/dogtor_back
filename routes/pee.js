@@ -9,6 +9,7 @@ router.post(
   '/',
   auth.setCurrentUser,
   dogPee.createPeeData,
+  dogPee.peeColorClassfication,
   alarm.searchFcmKey,
   alarm.createPushAlarm,
   function (req, res, next) {
