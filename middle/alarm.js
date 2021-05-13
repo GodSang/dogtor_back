@@ -40,7 +40,7 @@ const searchFcmKey = async (req, res, next) => {
       attributes: ['fcmKey'],
     });
     req.currentUser = {
-      fcmKey: fcmKey,
+      fcmKey: fcmKey.dataValues.fcmKey,
     };
     next();
   } catch (e) {
@@ -70,14 +70,13 @@ const createPushAlarm = async (req, res, next) => {
   if (!req.shouldRunFcm) {
     return next();
   }
-  var target_fcm = req.currentUser.fcmKey;
-
-  var message = {
+  const target_fcm = req.currentUser.fcmKey;
+  let message = {
     notification: {
-      title: '테스트 데이터 발송',
-      body: '데이터가 잘 가나요?',
+      title: req.currentDog.color + ' 발생',
+      body: req.currentDog.symptom,
     },
-    fcmToken: target_fcm,
+    token: target_fcm,
   };
 
   admin
@@ -89,6 +88,8 @@ const createPushAlarm = async (req, res, next) => {
     .catch(function (err) {
       console.log('Error Sending message!!! : ', err);
     });
+
+  next();
 };
 
 module.exports = {
