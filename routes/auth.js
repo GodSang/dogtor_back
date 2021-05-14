@@ -25,7 +25,7 @@ router.post('/', async function (req, res, next) {
       res.status(200).json({ next: 'signup' });
     }
   } catch (e) {
-    res.status(401);
+    res.status(401).json({ message: '로그인 에러 발생' });
   }
 });
 
