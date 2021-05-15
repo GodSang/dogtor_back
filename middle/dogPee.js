@@ -70,6 +70,8 @@ const peeColorClassfication = async (req, res, next) => {
       peeColor = '주황색 소변';
       symptom = '황달 혹은 소화 기관 문제가 의심됩니다.';
       break;
+    default:
+      req.shouldRunFcm = 0;
   }
   req.currentDog = {
     color: peeColor,

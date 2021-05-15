@@ -79,6 +79,8 @@ const pooColorClassfication = async (req, res, next) => {
       pooColor = '보라색 대변';
       symptom = '출혈성 위장염이 의심됩니다';
       break;
+    default:
+      req.shouldRunFcm = 0;
   }
   req.currentDog = {
     color: pooColor,
