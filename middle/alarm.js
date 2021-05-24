@@ -67,12 +67,13 @@ const updateAlarmOption = async (req, res, next) => {
 };
 
 const createPushAlarm = async (req, res, next) => {
-  if (!req.shouldRunFcm) {
+  if (req.shouldRunFcm == 0) {
     return next();
   }
+
   const target_fcm = req.currentUser.fcmKey;
   let message = {
-    notification: {
+    data: {
       title: req.currentDog.color + ' 발생',
       body: req.currentDog.symptom,
     },
