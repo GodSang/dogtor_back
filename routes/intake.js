@@ -9,12 +9,16 @@ router.post(
   '/',
   auth.setCurrentUser,
   dogIntake.createIntakeData,
-  dogIntake.calcIntake,
-  alarm.searchFcmKey,
-  alarm.updateAlarmOption,
   function (req, res, next) {
     res.status(201).json({ message: 'create intake success' });
   }
+);
+
+router.get(
+  '/recommend',
+  auth.setCurrentUser,
+  dogIntake.calcRecommendIntake,
+  dogIntake.calcIntakeSum
 );
 
 // Read
