@@ -67,7 +67,10 @@ const calcIntakeSum = async (req, res, next) => {
   });
 
   sumOfMeal *= 4.2;
-  let recomMeal = { sumMeal: sumOfMeal, recommendMeal: recommendAmount };
+  let recomMeal = {
+    sumMeal: sumOfMeal.toFixed(2),
+    recommendMeal: recommendAmount.toFixed(2),
+  };
   res.status(201).json(recomMeal);
 };
 
