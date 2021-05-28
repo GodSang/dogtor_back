@@ -20,6 +20,7 @@ module.exports = (sequelize, DataTypes) => {
       dog_gender: DataTypes.STRING,
       dog_weight: DataTypes.INTEGER,
       dog_image: DataTypes.INTEGER,
+      dog_kcal: DataTypes.INTEGER,
     },
     {
       sequelize,
