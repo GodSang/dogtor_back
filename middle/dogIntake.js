@@ -45,6 +45,7 @@ const calcIntakeSum = async (req, res, next) => {
   const intakeData = req.query;
   const Op = Sequelize.Op;
   const recommendAmount = req.currentData.reAmount;
+  const dogKcal = req.currentData.dogKcal;
 
   var startDate = new Date(intakeData.date);
   var endDate = new Date(intakeData.date);
@@ -66,7 +67,7 @@ const calcIntakeSum = async (req, res, next) => {
     sumOfMeal += e.amountOfMeal;
   });
 
-  sumOfMeal *= 4.2;
+  sumOfMeal *= dogKcal;
   let recomMeal = {
     sumMeal: sumOfMeal.toFixed(2),
     recommendMeal: recommendAmount.toFixed(2),
@@ -76,13 +77,14 @@ const calcIntakeSum = async (req, res, next) => {
 
 const calcRecommendIntake = async (req, res, next) => {
   const weightData = await db.user_dog_info.findOne({
-    attributes: ['dog_weight', 'dog_gender'],
+    attributes: ['dog_weight', 'dog_gender', 'dog_kcal'],
     where: {
       uid: req.currentUser.uid,
     },
   });
   const dogGender = weightData.dog_gender;
   const dogWeight = weightData.dog_weight;
+  const dogKcal = weightData.dog_kcal;
   let rer = 70 * Math.pow(dogWeight, 0.75);
   let der;
   if (dogGender == 'NONE') {
@@ -93,6 +95,7 @@ const calcRecommendIntake = async (req, res, next) => {
 
   req.currentData = {
     reAmount: der,
+    dogKcal: dogKcal,
   };
 
   next();
