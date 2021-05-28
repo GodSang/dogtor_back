@@ -26,6 +26,7 @@ const createUserInfo = async (req, res, next) => {
       dog_gender: userInfo.dog_gender,
       dog_weight: userInfo.dog_weight,
       dog_image: userInfo.dog_image,
+      dog_kcal: userInfo.dog_kcal,
     });
     res.status(201).json({ token: token });
   } catch (e) {
@@ -44,6 +45,7 @@ const readUserInfo = async (req, res, next) => {
         'dog_gender',
         'dog_weight',
         'dog_image',
+        'dog_kcal',
       ],
       where: {
         uid: req.currentUser.uid,
@@ -70,6 +72,7 @@ const updateUserInfo = async (req, res, next) => {
         dog_gender: userInfo.dog_gender,
         dog_weight: userInfo.dog_weight,
         dog_image: userInfo.dog_image,
+        dog_kcal: userInfo.dog_kcal,
       },
       { where: { uid: userEmail } }
     );
