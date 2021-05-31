@@ -37,7 +37,7 @@ const readPooData = async (req, res, next) => {
       },
       order: [['createdAt', 'DESC']],
       limit: pooData.limit * 1,
-      offset: pooData.page * 2,
+      offset: pooData.page * (pooData.limit * 1),
     });
     res.json(result);
   } catch (e) {
